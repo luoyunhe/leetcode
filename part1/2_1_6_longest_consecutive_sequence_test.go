@@ -24,6 +24,9 @@ func Test_getLongestConsecutiveSequence(t *testing.T) {
 			if got := getLongestConsecutiveSequence(tt.args.nums); got != tt.want {
 				t.Errorf("getLongestConsecutiveSequence() = %v, want %v", got, tt.want)
 			}
+			if got := getLongestConsecutiveSequenceV2(tt.args.nums); got != tt.want {
+				t.Errorf("getLongestConsecutiveSequenceV2() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }

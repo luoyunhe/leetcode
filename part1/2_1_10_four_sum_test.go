@@ -33,6 +33,9 @@ func Test_fourSum(t *testing.T) {
 			if gotResultList := fourSum(tt.args.nums, tt.args.target); !reflect.DeepEqual(gotResultList, tt.wantResultList) {
 				t.Errorf("fourSum() = %v, want %v", gotResultList, tt.wantResultList)
 			}
+			if gotResultList := fourSum2(tt.args.nums, tt.args.target); !reflect.DeepEqual(gotResultList, tt.wantResultList) {
+				t.Errorf("fourSum2() = %v, want %v", gotResultList, tt.wantResultList)
+			}
 		})
 	}
 }

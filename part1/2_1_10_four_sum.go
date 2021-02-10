@@ -44,3 +44,49 @@ func fourSum(nums []int, target int) (resultList [][]int) {
 
 	return
 }
+
+type cacheItem struct {
+	cIndex int
+	dIndex int
+}
+
+func fourSum2(nums []int, target int) (resultList [][]int) {
+	if len(nums) < 4 {
+		return
+	}
+	sort.Ints(nums)
+
+	cache := make(map[int][]*cacheItem)
+
+	for c := 2; c < len(nums)-1; c++ {
+		for d := c + 1; d < len(nums); d++ {
+			cache[nums[c]+nums[d]] = append(cache[nums[c]+nums[d]], &cacheItem{
+				cIndex: c,
+				dIndex: d,
+			})
+		}
+	}
+	set := make(map[string]struct{})
+
+	for a := 0; a < len(nums)-3; a++ {
+		for b := a + 1; b < len(nums)-2; b++ {
+			list := cache[target-nums[a]-nums[b]]
+			for _, item := range list {
+				if item.cIndex <= b {
+					continue
+				}
+				result := []int{nums[a], nums[b], nums[item.cIndex], nums[item.dIndex]}
+				if _, exist := set[genKey(result)]; exist {
+					continue
+				} else {
+					resultList = append(resultList, result)
+					set[genKey(result)] = struct{}{}
+				}
+
+			}
+
+		}
+
+	}
+	return
+}
